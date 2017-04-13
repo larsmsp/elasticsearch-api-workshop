@@ -17,9 +17,11 @@ def hello_world():
     pass
 
 
-# Skal returnere summen av tallene angitt i query-parametrene "operand1" og operand2, f.eks /greet?operand1=2&operand2=2
-@app.route('/add', methods=['GET'])
-def add():
+# Skal returnere resultatet av enkle heltallsoperasjoner.
+# Operatorer og operand er angitt i query-parametrene "operator", "operand1" og "operand2", f.eks /greet?operator=plus&operand1=2&operand2=2
+# Endepunktet skal støtte "plus", "minus", "mult" og "div".
+@app.route('/calculator', methods=['GET'])
+def calculator():
     pass
 
 
