@@ -16,13 +16,8 @@ def test_hello_world(client):
     assert 'Hello' in response.data and 'world' in response.data
 
 
-def test_greet_query_string(client):
-    response = client.get('/greet', query_string={'name': 'My Name'})
+def test_add(client):
+    response = client.get('/add', query_string={'operand1': 2, 'operand2': 2})
     assert response.status_code == 200
-    assert 'My Name' in response.data
+    assert '4' in response.data
 
-
-def test_greet_endpoint(client):
-    response = client.get('/resource/my-id')
-    assert response.status_code == 200
-    assert 'my-id' in response.data

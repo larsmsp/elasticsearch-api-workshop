@@ -17,15 +17,9 @@ def hello_world():
     pass
 
 
-# Skal returnere en hilsen til navnet angitt i query-parameteret "name", f.eks /greet?name=My%20Name
-@app.route('/greet', methods=['GET'])
-def greet():
-    pass
-
-
-# Skal returnere en hilsen til navnet angitt i parameteret "id", f.eks /resource/my-id
-@app.route('/resource/<id>', methods=['GET'])
-def get_resource(id):
+# Skal returnere summen av tallene angitt i query-parametrene "operand1" og operand2, f.eks /greet?operand1=2&operand2=2
+@app.route('/add', methods=['GET'])
+def add():
     pass
 
 
