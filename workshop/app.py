@@ -4,7 +4,7 @@ import os
 import urllib2
 
 from elasticsearch_dsl.connections import connections
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from model import DocumentIndex
 
@@ -41,14 +41,41 @@ def root():
                            elasticsearch_status='Connected' if verify_elasticsearch_connection() else 'Not connected')
 
 
-@app.route('/create/<string:name>', methods=['POST'])
+@app.route('/create/<string:name>', methods=['PUT'])
 def create(name):
     if DocumentIndex.exists(name):
-        return 'An index with that name already exists.', 409
+        return 'An index with the name %s already exists.' % name, 409
     if DocumentIndex.create(name):
         return 'Index created', 200
     else:
         return 'Unable to create index', 500
+
+
+''' 
+Metoden skal tilhøre endepunktet /index/<navn på indeks> og metoden "POST" og indeksere N dokumenter.
+Dokumentene er formatert som JSON i en liste, der hvert dokument følger denne kontrakten:
+{
+    "title": "<tittel på dokument>",
+    "contents": "<innhold i dokument>",
+    "url: "<url til dokumentet>"
+}
+'''
+def index_documents(index_name):
+    pass
+
+
+''' 
+Metoden skal tilhøre endepunktet /update/<navn på indeks>/<dokument-id> og metoden "PUT" og oppdatere dokumentet
+med angitt id.
+Dokument er formatert som JSON, der dokumentet følger denne kontrakten:
+{
+    "title": "<tittel på dokument>",
+    "contents": "<innhold i dokument>",
+    "url: "<url til dokumentet>"
+}
+'''
+def update_document(index_name, document_id):
+    pass
 
 
 if __name__ == '__main__':
