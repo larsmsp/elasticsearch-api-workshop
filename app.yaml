@@ -1,0 +1,7 @@
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT workshop.app:app
+service:
+
+env_variables:
+  ELASTICSEARCH_HOSTS: ''
