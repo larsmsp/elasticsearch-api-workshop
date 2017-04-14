@@ -39,9 +39,10 @@ def root():
     return render_template('root.html',
                            elasticsearch_status='Connected' if verify_elasticsearch_connection() else 'Not connected')
 
-
-# Metoden 'create' skal opprett en indeks med navnet angitt i 'name'.
-# Den skal svare på endepunktet /create og med HTTP-metode 'POST'
+'''
+Metoden 'create' skal opprett en indeks med navnet angitt i 'name'.
+Den skal svare på endepunktet /create/<navn på indeks> og med HTTP-metode 'PUT'
+'''
 def create(name):
     pass
 
