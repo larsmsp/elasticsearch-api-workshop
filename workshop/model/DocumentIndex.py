@@ -1,5 +1,7 @@
 from elasticsearch_dsl import Index, analyzer
 
+import Document
+
 
 def create(name, analyzer_name='norwegian'):
     index = Index(name)
