@@ -3,9 +3,8 @@ import logging
 import urllib2
 
 from elasticsearch_dsl.connections import connections
-from flask import Flask, request, render_template
+from flask import Flask, render_template
 from flask_cors import CORS
-from model import DocumentIndex
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
