@@ -7,11 +7,10 @@ def get_results(response):
     for hit in response:
         document = {
             'id': hit.meta.id,
-            'score': hit.meta.score,
             'title': hit.title,
             'contents': hit.contents,
             'url': hit.url,
-            'created_at': hit.created_at
+            'score': hit.meta.score,
         }
         results['index'] = hit.meta.index
         results['results'].append(document)
