@@ -1,7 +1,7 @@
 runtime: python
 env: flex
 entrypoint: gunicorn -c gunicorn.config.py -b :$PORT workshop.app:app
-service:
+service: default
 
 env_variables:
-  ELASTICSEARCH_HOSTS: ''
+  ELASTICSEARCH_HOSTS: '10.142.0.7:9200'

@@ -56,7 +56,7 @@ def create(index_name):
         return 'Unable to create index', 500
 
 
-@app.route('/index/<string:index_name', methods=['POST'])
+@app.route('/index/<string:index_name>', methods=['POST'])
 def index_documents(index_name):
     if request.is_json:
         try:
@@ -93,6 +93,7 @@ def update_document(index_name, document_id):
         return 'Request is not JSON. Ensure Content-Type is application/json.', 408
 
 
+@app.route('/search/<string:index_name>')
 def search(index_name):
     """
     Endepunktet skal være /search/<navn på index> og være tilknyttet HTTP-metoden GET.
