@@ -51,30 +51,35 @@ def create(name):
         return 'Unable to create index', 500
 
 
-''' 
-Metoden skal tilhøre endepunktet /index/<navn på indeks> og metoden "POST" og indeksere N dokumenter.
-Dokumentene er formatert som JSON i en liste, der hvert dokument følger denne kontrakten:
-{
-    "title": "<tittel på dokument>",
-    "contents": "<innhold i dokument>",
-    "url: "<url til dokumentet>"
-}
-'''
 def index_documents(index_name):
+    """
+    Metoden skal tilhøre endepunktet /index/<navn på indeks> og metoden "POST" og indeksere N dokumenter.
+    Dokumentene er formatert som JSON i en liste, der hvert dokument følger denne kontrakten:
+    {
+        "title": "<tittel på dokument>",
+        "contents": "<innhold i dokument>",
+        "url: "<url til dokumentet>"
+    }
+    :param index_name: Navn på indeks 
+    :return: 
+    """
     pass
 
 
-''' 
-Metoden skal tilhøre endepunktet /update/<navn på indeks>/<dokument-id> og metoden "PUT" og oppdatere dokumentet
-med angitt id.
-Dokument er formatert som JSON, der dokumentet følger denne kontrakten:
-{
-    "title": "<tittel på dokument>",
-    "contents": "<innhold i dokument>",
-    "url: "<url til dokumentet>"
-}
-'''
 def update_document(index_name, document_id):
+    """
+    Metoden skal tilhøre endepunktet /update/<navn på indeks>/<dokument-id> og metoden "PUT" og oppdatere dokumentet
+    med angitt id.
+    Dokument er formatert som JSON, der dokumentet følger denne kontrakten:
+    {
+        "title": "<tittel på dokument>",
+        "contents": "<innhold i dokument>",
+        "url: "<url til dokumentet>"
+    }
+    :param index_name: Navn på indeks.
+    :param document_id: ID på dokumentet som skal oppdateres.
+    :return: 
+    """
     pass
 
 
