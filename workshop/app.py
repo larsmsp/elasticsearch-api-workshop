@@ -46,7 +46,7 @@ def create(name):
     if DocumentIndex.exists(name):
         return 'An index with the name %s already exists.' % name, 409
     if DocumentIndex.create(name):
-        return 'Index created', 200
+        return '', 200
     else:
         return 'Unable to create index', 500
 
