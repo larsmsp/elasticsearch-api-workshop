@@ -2,7 +2,7 @@ def get_results(response):
     results = {
         'index': '',
         'results': [],
-        'total': 0
+        'total': response.hits.total
     }
     for hit in response:
         document = {
@@ -15,5 +15,4 @@ def get_results(response):
         }
         results['index'] = hit.meta.index
         results['results'].append(document)
-        results['total'] += 1
     return results
