@@ -92,5 +92,23 @@ def update_document(index_name, document_id):
         return 'Request is not JSON. Ensure Content-Type is application/json.', 408
 
 
+def search(index_name):
+    """
+    Endepunktet skal være /search/<navn på index> og være tilknyttet HTTP-metoden GET.
+    Søkestrengen skal være en query-string.
+    :param index_name:  
+    :return:
+     En liste av dokumenter som matcher søkestrengen. Hvert dokument må være formatert slik:
+     {
+        "id": "<id>",
+        "title": "<tittel>",
+        "contents": "<innhold>",
+        "url": "<url>",
+        "score": "<score>"
+     }
+    """
+    pass
+
+
 if __name__ == '__main__':
     app.run()
