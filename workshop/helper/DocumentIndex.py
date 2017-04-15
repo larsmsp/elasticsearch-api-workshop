@@ -1,5 +1,5 @@
 from elasticsearch.helpers import bulk
-from elasticsearch_dsl import Index, analyzer
+from elasticsearch_dsl import Index, analyzer, Search
 from elasticsearch_dsl.connections import connections
 
 import workshop.model.Document
@@ -31,4 +31,9 @@ def index(name, documents):
                    '_source': d
                } for d in documents)
     return bulk(conn, actions)[0]
+
+
+def search(name, query):
+    s = Search(index=name).query('query_string', query=query)
+    return s.execute()
 
