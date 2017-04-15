@@ -34,5 +34,9 @@ def index(name, documents):
 
 
 def search(name, query):
-    s = Search(index=name).query('query_string', query=query)
+    s = Search(index=name)\
+        .highlight_options(require_field_match=False)\
+        .highlight('contents')\
+        .query('query_string', query=query)
     return s.execute()
+
