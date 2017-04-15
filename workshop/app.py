@@ -9,8 +9,9 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from werkzeug.exceptions import BadRequest
 
-from model import Document, Results, DocumentIndex
+from model import Document, Results
 from model.Document import create_document
+from workshop.helper import DocumentIndex
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
