@@ -2,7 +2,7 @@ from elasticsearch.helpers import bulk
 from elasticsearch_dsl import Index, analyzer
 from elasticsearch_dsl.connections import connections
 
-import Document
+import workshop.model.Document
 
 
 def create(name, analyzer_name='norwegian'):
@@ -11,7 +11,7 @@ def create(name, analyzer_name='norwegian'):
         number_of_shards=2,
         number_of_replicas=1
     )
-    index.doc_type(Document)
+    index.doc_type(workshop.model.Document)
     index.analyzer(analyzer(analyzer_name))
     index.delete(ignore=404)
     index.create()

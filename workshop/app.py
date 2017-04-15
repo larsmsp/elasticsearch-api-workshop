@@ -8,9 +8,9 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from werkzeug.exceptions import BadRequest
 
-from model import DocumentIndex
-from model.Document import create_document
 from model import Document
+from model.Document import create_document
+from workshop.helper import DocumentIndex
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
@@ -98,14 +98,19 @@ def search(index_name):
     Søkestrengen skal være en query-string.
     :param index_name:  
     :return:
-     En liste av dokumenter som matcher søkestrengen. Hvert dokument må være formatert slik:
-     {
-        "id": "<id>",
-        "title": "<tittel>",
-        "contents": "<innhold>",
-        "url": "<url>",
-        "score": "<score>"
-     }
+    Et JSON-objekt som inneholder indeksen det ble søkt i, antall resultater og en liste av dokumenter.
+    Objektet skal være formatert slik:
+    {
+        "index": "<indeksnavn>",
+        "total": "<antall resultater>",
+        "results": [{
+            "id": "<id>",
+            "title": "<tittel>",
+            "contents": "<innhold>",
+            "url": "<url>",
+            "score": "<score>"
+        }]
+    }
     """
     pass
 
