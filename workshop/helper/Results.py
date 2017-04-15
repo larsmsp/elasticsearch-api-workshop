@@ -11,6 +11,7 @@ def get_results(response):
             'contents': hit.contents,
             'url': hit.url,
             'score': hit.meta.score,
+            'highlight': hit.meta.highlight['contents']
         }
         results['index'] = hit.meta.index
         results['results'].append(document)

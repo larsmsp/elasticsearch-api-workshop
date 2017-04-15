@@ -99,6 +99,7 @@ def search(index_name):
     :param index_name:  
     :return:
     Et JSON-objekt som inneholder indeksen det ble søkt i, antall resultater og en liste av dokumenter.
+    I tillegg til de vanlige feltene ved et dokument skal det inkludere "score" og "highlight".
     Objektet skal være formatert slik:
     {
         "index": "<indeksnavn>",
