@@ -1,6 +1,7 @@
 # coding=utf-8
 import logging
 import os
+import urllib
 import urllib2
 
 from elasticsearch_dsl.connections import connections
@@ -8,9 +9,8 @@ from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from werkzeug.exceptions import BadRequest
 
-from model import DocumentIndex
+from model import Document, Results, DocumentIndex
 from model.Document import create_document
-from model import Document
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
@@ -68,7 +68,7 @@ def index_documents(index_name):
                                                                          d['url']) for d in json])
                 return jsonify({'indexed_documents': indexed_documents}), 200
             else:
-                return 'Index "%s" does not exist.' % index_name, 408
+                return 'Index "%s" does not exist.' % index_name, 404
         except BadRequest:
             return 'An exception was thrown parsing your JSON. Maybe you could try linting it?', 408
     else:
@@ -107,7 +107,13 @@ def search(index_name):
         "score": "<score>"
      }
     """
-    pass
+    if DocumentIndex.exists(index_name):
+        if 'q' in request.args:
+            query = urllib.unquote_plus(request.args['q'])
+            results = Results.get_results(DocumentIndex.search(index_name, query))
+            return jsonify(results), 200
+    else:
+        return 'Index "%s" does not exist.' % index_name, 404
 
 
 if __name__ == '__main__':
