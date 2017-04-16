@@ -109,7 +109,10 @@ def search(index_name):
             "title": "<tittel>",
             "contents": "<innhold>",
             "url": "<url>",
-            "score": "<score>"
+            "score": "<score>",
+            "highlight": {
+                "contents": []
+            }
         }]
     }
     """
