@@ -1,4 +1,7 @@
+from elasticsearch.helpers import bulk
 from elasticsearch_dsl import Index, analyzer
+from elasticsearch_dsl.connections import connections
+
 import workshop.model.Document
 
 
@@ -17,3 +20,14 @@ def create(name, analyzer_name='norwegian'):
 
 def exists(name):
     return Index(name).exists()
+
+
+def index(name, documents):
+    conn = connections.get_connection()
+    actions = ({
+                   '_op_type': 'index',
+                   '_index': name,
+                   '_type': 'document',
+                   '_source': d
+               } for d in documents)
+    return bulk(conn, actions)[0]
