@@ -1,8 +1,13 @@
+import sys
+
 from elasticsearch.helpers import bulk
 from elasticsearch_dsl import Index, analyzer, Search
 from elasticsearch_dsl.connections import connections
+from os.path import join, abspath, dirname
 
-from model import Document
+sys.path.append(join(dirname(abspath(__file__)), '../..'))
+
+from workshop.model import Document
 
 
 def create(name, analyzer_name='norwegian'):

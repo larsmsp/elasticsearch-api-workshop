@@ -1,6 +1,7 @@
 # coding=utf-8
 import logging
 import os
+import sys
 import urllib
 import urllib2
 
@@ -8,11 +9,15 @@ from elasticsearch.client import Elasticsearch
 from elasticsearch_dsl.connections import connections
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+from os.path import join, abspath, dirname
 from werkzeug.exceptions import BadRequest
 
-from model import Document
-from model.Document import create_document
-from helper import DocumentIndex, Results
+sys.path.append(join(dirname(abspath(__file__)), '..'))
+
+from workshop.model import Document
+from workshop.model.Document import create_document
+from workshop.helper import DocumentIndex, Results
+
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
