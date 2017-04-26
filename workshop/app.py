@@ -3,6 +3,7 @@ import logging
 import os
 import urllib2
 
+from elasticsearch.client import Elasticsearch, CatClient
 from elasticsearch_dsl.connections import connections
 from flask import Flask, render_template
 from flask_cors import CORS
@@ -14,7 +15,7 @@ logging.getLogger().setLevel(logging.INFO)
 
 
 ES_HOSTS_ENV = 'ELASTICSEARCH_HOSTS'
-es_hosts = ['10.0.0.10'] if ES_HOSTS_ENV not in os.environ else str(os.environ[ES_HOSTS_ENV]).split(',')
+es_hosts = ['localhost'] if ES_HOSTS_ENV not in os.environ else str(os.environ[ES_HOSTS_ENV]).split(',')
 
 
 def verify_elasticsearch_connection():
@@ -50,6 +51,17 @@ def create(name):
         return '', 200
     else:
         return 'Unable to create index', 500
+
+
+@app.route('/health/<string:name>', methods=['GET'])
+def health(name):
+    if DocumentIndex.exists(name):
+        columns = 'health,status,index,docs.count,store.size'
+        es = Elasticsearch(es_hosts)
+        health = es.cat.indices(index=name, h=columns).split(' ')
+        return render_template('health.html', health=health)
+    else:
+        return 'Index "%s" does not exist' % name, 404
 
 
 def index_documents(index_name):
