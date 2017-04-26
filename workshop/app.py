@@ -2,16 +2,19 @@
 import logging
 import urllib2
 
+from elasticsearch.client import Elasticsearch, CatClient
 from elasticsearch_dsl.connections import connections
 from flask import Flask, render_template
 from flask_cors import CORS
+
+from workshop.helper import DocumentIndex
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
 
 # Skal lese ut listen over Elasticsearch-instanser av miljøvariabelen 'ELASTICSEARCH_HOSTS'
 # Denne settes i app.yaml
-es_hosts = ''
+es_hosts = ['localhost:9200']
 
 
 def verify_elasticsearch_connection():
@@ -49,6 +52,16 @@ def create(name):
     """
     pass
 
+
+@app.route('/health/<string:name>', methods=['GET'])
+def health(name):
+    if DocumentIndex.exists(name):
+        columns = 'health,status,index,docs.count,store.size'
+        es = Elasticsearch(es_hosts)
+        health = es.cat.indices(index=name, h=columns).split(' ')
+        return render_template('health.html', health=health)
+    else:
+        return 'Index "%s" does not exist' % name, 404
 
 if __name__ == '__main__':
     app.run()
