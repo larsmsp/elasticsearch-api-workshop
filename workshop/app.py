@@ -1,12 +1,17 @@
 # coding=utf-8
 import logging
 import os
+import sys
+import urllib
 import urllib2
 
 from elasticsearch.client import Elasticsearch
 from elasticsearch_dsl.connections import connections
 from flask import Flask, render_template
 from flask_cors import CORS
+from os.path import join, abspath, dirname
+
+sys.path.append(join(dirname(abspath(__file__)), '..'))
 
 from helper import DocumentIndex
 
