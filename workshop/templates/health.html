@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Our Elasticsearch API - Index health</title>
+    </head>
+    <body>
+        <h1>Health of index {{ health[2] }}</h1>
+        <table>
+            <tr>
+                <th>Health</th>
+                <th>Status</th>
+                <th>No. documents</th>
+                <th>Size</th>
+            </tr>
+            <tr>
+                <td>{{ health[0] }}</td>
+                <td>{{ health[1] }}</td>
+                <td>{{ health[3] }}</td>
+                <td>{{ health[4] }}</td>
+            </tr>
+        </table>
+    </body>
+</html>
