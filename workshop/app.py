@@ -3,7 +3,7 @@ import logging
 import os
 import urllib2
 
-from elasticsearch.client import Elasticsearch, CatClient
+from elasticsearch.client import Elasticsearch
 from elasticsearch_dsl.connections import connections
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
@@ -11,14 +11,14 @@ from werkzeug.exceptions import BadRequest
 
 from model import Document
 from model.Document import create_document
-from workshop.helper import DocumentIndex
+from helper import DocumentIndex
 
 logging.basicConfig(format='[%(asctime)s] [%(levelname)s] %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 logging.getLogger().setLevel(logging.INFO)
 
 
 ES_HOSTS_ENV = 'ELASTICSEARCH_HOSTS'
-es_hosts = ['localhost'] if ES_HOSTS_ENV not in os.environ else str(os.environ[ES_HOSTS_ENV]).split(',')
+es_hosts = ['localhost:9200'] if ES_HOSTS_ENV not in os.environ else str(os.environ[ES_HOSTS_ENV]).split(',')
 
 
 def verify_elasticsearch_connection():
