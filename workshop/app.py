@@ -1,13 +1,18 @@
 # coding=utf-8
 import logging
 import os
+import sys
+import urllib
 import urllib2
 
 from elasticsearch.client import Elasticsearch
 from elasticsearch_dsl.connections import connections
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+from os.path import join, abspath, dirname
 from werkzeug.exceptions import BadRequest
+
+sys.path.append(join(dirname(abspath(__file__)), '..'))
 
 from model import Document
 from model.Document import create_document
